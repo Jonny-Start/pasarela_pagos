@@ -1,0 +1,189 @@
+* {
+    padding: 0%;
+    margin: 0%;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    /* overflow: hidden; */
+  }
+  header {
+    /* position: relative; */
+    width: 100%;
+    height: 96px;
+    background: rgb(8, 9, 19);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+  }
+  header div.brand {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 4%;
+    width: 20%;
+  }
+  header div.brand span {
+    font-size: 25px;
+  }
+  div.brand h3 {
+    margin-left: 5%;
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
+  header span#menuIcon {
+    display: none;
+  }
+  header div.navbar {
+    position: relative;
+    width: 70%;
+    /* padding: 5%; */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  header div.navbar .searchBox {
+    position: relative;
+    width: 40%;
+    display: flex;
+    align-items: center;
+  }
+  header div.navbar .searchBox input {
+    width: 100%;
+    height: 35px;
+    border: none;
+    border-radius: 8px;
+    padding: 1%;
+    text-indent: 10px;
+    font-size: 18px;
+    outline: none;
+    background: white;
+  }
+  header div.navbar .searchBox span#searchIcon {
+    position: relative;
+    left: -30px;
+    font-size: 22px;
+    color: rgb(77, 77, 77);
+    cursor: pointer;
+    z-index: 221;
+  }
+  header div.navbar ul {
+    width: 60%;
+    text-align: center;
+    margin-bottom: 0;
+  }
+  header div.navbar ul li {
+    display: inline-block;
+    margin-left: 4%;
+    transition: all 0.5s ease;
+    text-align: center;
+    cursor: pointer;
+    padding: 1%;
+    height: 30px;
+    overflow: hidden;
+  }
+  header div.navbar ul li:hover {
+    height: 52px;
+
+  }
+  header div.navbar ul li span#headIcon {
+    display: block;
+    font-size: 22px;
+  }
+  header div.navbar ul li span#headIcon span{
+    font-size: 8px;
+    position: absolute;
+    /* left: 142px; */
+    margin-left: 3px;
+    border-radius: 16px;
+    border: 1px solid white;
+    width: 15px;
+    height: 15px;
+    padding-top: 2px;
+
+  }
+  header div.navbar ul li a {
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+  }
+  header div.navbar ul li a:active,
+  :focus {
+    text-decoration: underline;
+    font-weight: 700;
+  }
+
+  
+  @media (max-width: 800px) {
+    header div.navbar{
+      position: relative;
+      display: block;
+      width: 60%;
+      display: none;
+    }
+    header div.navbar.navactive {
+      display: inline;
+    }
+    header div.navbar .searchBox {
+        position: relative;
+        width: 100%;
+        top: 66px;
+        z-index: 221;
+        left: 5%;
+    }
+    header span#menuIcon {
+      display: inline;
+      position: fixed;
+      font-size: 25px;
+      margin-left: 88%;
+      z-index: 222;
+      float: right;
+      padding: 1%;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid rgb(221, 221, 221);
+    }
+    header div.navbar ul {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        background-color: rgb(8, 9, 19);
+        z-index: 2;
+        right: 0;
+        margin-top: 2em;
+    }
+    header div.navbar ul li {
+      display: flex;
+      margin-top: 20px;
+      width: 100%;
+      height: 40px;
+      text-align: left;
+      position: relative;
+      top: 50px;
+      padding: 2%;
+    }
+    header div.navbar ul li #headIcon {
+      display: inline-block;
+      font-size: 24px;
+    }
+    header div.navbar ul li span#headIcon span {
+      margin-left: 2px;
+      width: 13px;
+      height: 13px;
+      padding-top: 1px;
+      padding-left: 4px;
+      top: -1px;
+  }
+    header div.navbar  ul li:hover {
+      background: rgb(35, 36, 51);
+    }
+    header div.navbar ul li a {
+      margin-left: 11px;
+      font-family: 600;
+    }
+  }

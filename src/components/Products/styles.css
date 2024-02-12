@@ -1,0 +1,152 @@
+section#contentProducts ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
+    gap: 20px;
+    margin-top: 9em;
+}
+
+section#contentProducts li.targetProduct {
+    width: 20em;
+    height: 29em;
+    border-radius: 10px;
+    background-color: white;
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 140px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(248, 248, 248, 0.5);
+    transition: 0.5s;
+    border: 1px solid #b3b3b3;
+}
+
+section#contentProducts li.targetProduct div.descriptionProduct {
+    background-color: rgb(73 33 165 / 81%);
+    margin: 5px;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.5s;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    padding: 21px;
+}
+
+section#contentProducts li.targetProduct div.descriptionProduct p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 174px;
+    display: block;
+}
+
+section#contentProducts li.targetProduct:hover div.descriptionProduct {
+    top: 0;
+}
+
+section#contentProducts li.targetProduct>span#spanDiscount {
+    width: 21%;
+    position: static;
+    display: block;
+    background-color: green;
+    border-radius: 7px 0px 6px;
+    color: white;
+    text-align: center;
+}
+
+section#contentProducts li.targetProduct>span#contentTitle {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background: #2a879d85;
+}
+
+section#contentProducts li.targetProduct>span#contentTitle>h4 {
+    color: white;
+    font-size: 1.2em;
+    margin: 1em 2em 1em;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+section#contentProducts li.targetProduct>span#contentTitle>div#stars {
+    background-color: black;
+}
+
+section#contentProducts li.targetProduct span#contentPrice {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+section#contentProducts li.targetProduct>span#contentPrice>p#spanPrice {
+    color: rgb(9, 9, 9);
+    font-size: 30px;
+    text-align: center;
+}
+
+section#contentProducts li.targetProduct>span#contentPrice>span#contentStar {
+    text-align: center;
+    margin-bottom: 0.4em;
+}
+
+section#contentProducts li.targetProduct>span#contentPrice>span#contentStar div#stars {
+    margin-bottom: 1.4em;
+}
+
+
+
+
+
+
+section#contentProducts li.targetProduct.targetLoading {
+    opacity: 70%;
+
+    /* animation-name: loadingItem;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-play-state: running; */
+
+
+    background: #eee;
+    background: linear-gradient(99deg, #d5d5d5 8%, #ffffff 18%, #d5d5d5 33%);
+    background-size: 200% 100%;
+    animation: 1.5s shine linear infinite;
+
+}
+
+.itemLoading p {
+    color: aqua;
+}
+
+@keyframes shine {
+    to {
+        background-position-x: -200%;
+    }
+}
+
+/* @keyframes loadingItem {
+    0% {
+        background-color: #0000009e;
+    }
+
+    50% {
+        background-color: #fdf0f09e;
+    }
+
+    100% {
+        background-color: #0000009e;
+    }
+} */

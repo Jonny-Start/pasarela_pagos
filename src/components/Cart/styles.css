@@ -1,0 +1,91 @@
+section#contentPopup div#contentCards div.contentCard div.contentImage {
+    width: 8em;
+    height: 8em;
+    border-radius: 10px;
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 78px;
+    position: relative;
+    overflow: hidden;
+}
+
+section#contentPopup div#contentCards div.contentCard div.contentInfo {
+    width: 81%;
+}
+
+section#contentPopup div#contentCards div.contentCard div.contentInfo span.contentP {
+    text-align: left;
+}
+
+section#contentPopup div#contentCards div.contentCard div.contentInfo span.contentP p.title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: bold;
+    margin-top: 1em;
+}
+
+section#contentPopup div#contentCards div.contentCard div.contentInfo div.contentAmount {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+section#contentPopup div#contentCards div.contentCard div.contentInfo div.contentAmount span {
+    text-align: left;
+    width: 50%;
+}
+
+section#contentPopup div#contentCards div.contentCard div.contentInfo div.contentAmount span i {
+    border: 1px solid gray;
+    padding: 0.2em;
+    border-radius: 13px;
+    color: gray;
+    margin: 0.2em;
+    font-size: 13px;
+    display: inline;
+}
+
+section#contentPopup div#contentCards div.contentCard div.contentInfo div.contentAmount span i:hover {
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+}
+
+section#contentPopup div#contentCards div.contentCard div.contentInfo div.contentAmount p {
+    font-size: 16px;
+}
+
+section#contentPopup div#contentCards div.contentCard div.contentInfo div.contentAmount p#delete {
+
+    font-size: 14px;
+    gap: 1p;
+    color: #c11313;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+section#contentPopup div#contentCards div.contentCard div.contentInfo div.contentAmount p#delete i {
+    margin-left: 3px;
+}
+
+section#contentPopup div#contentCards div.contentCard div.contentInfo p.price {
+    text-align: right;
+    font-size: 19px;
+    font-weight: 500;
+}
+
+section#contentPopup div#contentCards div#contentTotal {
+    text-align: right;
+    font-size: 21px;
+    margin-right: 3px;
+    font-weight: 500;
+}
+
+section#contentPopup div#contentCards h2.titlteNotProducts {
+    font-size: 1.3em;
+    color: #8b8585;
+    margin-bottom: 2em;
+}

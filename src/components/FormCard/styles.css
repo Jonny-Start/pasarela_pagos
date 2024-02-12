@@ -1,0 +1,10 @@
+input,
+select,
+input[type="checkbox"] {
+    background-color: white;
+    color: black;
+}
+
+.errorInput{
+    background-color: red;
+}
