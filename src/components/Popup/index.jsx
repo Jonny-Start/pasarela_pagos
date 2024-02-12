@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useSelector, useDispatch } from "react-redux"
 import { Cart } from "./../Cart/index.jsx"
-import { setStepMethod, removeStepMethod, removeStepData } from "./../../redux/stepPaySlice.js"
+import { setStepMethod, removeStepMethod, removeStepData, changeStepPayState } from "./../../redux/stepPaySlice.js"
 import { Method } from "./../Method/index.jsx"
 import { FormCard } from "./../FormCard/index.jsx"
 import { ResumPayment } from "./../ResumPayment/index.jsx"
+import { addMessage } from "./../../redux/appSlice.js"
+import { removeAllProductsCart } from "./../../redux/cartSlice.js"
 
 import "./styles.css";
 import { useEffect, useState } from "react"
@@ -14,6 +16,7 @@ export const Popup = ({ togglePopup, onUpdateLocalStorageCart, setUpdateLocalSte
     const stepPay = useSelector((state) => state.stepPay);
     const [stepInfo, setStepInfo] = useState(false);
     const [disabledButtonPay, setDisabledButtonPay] = useState(false);
+    const [resumDataPayment, setResumDataPayment] = useState({});
     const step = stepPay.stepData ? 3 : stepPay.stepMethod ? 2 : 1;
     const dispatch = useDispatch();
 
@@ -21,7 +24,7 @@ export const Popup = ({ togglePopup, onUpdateLocalStorageCart, setUpdateLocalSte
         return total + product.priceUnit * product.quantity;
     }, 0).toFixed(2);
 
-    const onUpdateLocalStep = () => {
+    const onUpdateLocalStep = async () => {
         const step = stepPay.stepData ? 3 : stepPay.stepMethod ? 2 : 1;
         if (step == 1) {
             dispatch(setStepMethod(2));
@@ -32,7 +35,20 @@ export const Popup = ({ togglePopup, onUpdateLocalStorageCart, setUpdateLocalSte
             setUpdateLocalStep();
             return
         } else if (step == 3) {
-            setStepInfo(true);
+            if (stepInfo === true) {
+                dispatch(changeStepPayState()); // Elimina todos los pasos de pago
+                dispatch(removeAllProductsCart()); // Elimina todos los productos en el carrito
+                localStorage.removeItem('cartProducts');
+                localStorage.removeItem('step');
+                setStepInfo(false); // Oculta el resumen de pago
+                dispatch(addMessage({ type: 'success', title: 'COMPRA REALIZADA', time: 'Justo ahora', body: 'Todos los productos en tu carrito fueron pagados' }));
+                togglePopup(); // Cierra el popup
+                setUpdateLocalStep(); //Da el permiso para actualiza el localStorage
+                return
+            } else {
+                setStepInfo(true);
+            }
+
             return
         }
 
@@ -56,6 +72,7 @@ export const Popup = ({ togglePopup, onUpdateLocalStorageCart, setUpdateLocalSte
                 setStepInfo(false); // Oculta el resumen de pago
                 return;
             }
+            setResumDataPayment(''); // Limpia los datos del resumen de pago
             onUpdateLocalStep(2); // Vuelve al paso 2
             dispatch(removeStepData()); // Elimina el paso 3
             setUpdateLocalStep(); // Actualiza el localStorage
@@ -78,20 +95,20 @@ export const Popup = ({ togglePopup, onUpdateLocalStorageCart, setUpdateLocalSte
                     <Cart totalPrices={totalPrices} onUpdateLocalStorageCart={() => onUpdateLocalStorageCart()} />
                     :
                     (step == 2 ?
-                        <Method setUpdateLocalStep={() => setUpdateLocalStep()} setDisabledButtonPay={(state) => setDisabledButtonPay(state)} />
+                        <Method setUpdateLocalStep={() => setUpdateLocalStep()} setDisabledButtonPay={(state) => setDisabledButtonPay(state)} setStepInfo={() => setStepInfo(false)} />
                         :
                         (step == 3 ?
-                            stepInfo ?
-                                <ResumPayment />
+                            stepInfo === true ?
+                                <ResumPayment resumDataPayment={resumDataPayment} />
                                 :
-                                <FormCard setUpdateLocalStep={() => setUpdateLocalStep()} setDisabledButtonPay={() => setDisabledButtonPay()} />
+                                <FormCard setUpdateLocalStep={() => setUpdateLocalStep()} setDisabledButtonPay={() => setDisabledButtonPay()} setResumDataPayment={(data) => setResumDataPayment(data)} />
                             : ''))
                 }
 
 
                 <div id="contentButtons">
                     <button id="cancel" onClick={() => onTogglePopup()} >
-                        {step == 1 ? "Cancelar" : "Atras"}
+                        {step == 1 ? "Cancelar" : "Atrás"}
                     </button>
                     {products.length !== 0 && step != 2 &&
                         <button id="buy" onClick={() => onUpdateLocalStep()} disabled={disabledButtonPay}>
