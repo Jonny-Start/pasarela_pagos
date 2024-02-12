@@ -1,0 +1,106 @@
+div#contentResumPayment h2{
+    font-weight: 600;
+} 
+div#contentResumPayment h5 {
+    text-align: left;
+    margin-left: 1em;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+div#contentResumPayment div.contentProduct {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #c3c3c3;
+    margin-bottom: 1em;
+    padding-right: 0.5em;
+}
+
+div#contentResumPayment div.contentProduct div.contentImage {
+    width: 7em;
+    height: 7em;
+    background-size: 71px;
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden;
+}
+
+div#contentResumPayment div.contentProduct div.contentInfo {
+    width: 73%;
+    margin-left: 0.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 2em;
+}
+
+div#contentResumPayment div.contentProduct div.contentInfo p {
+    margin-bottom: 0.3em;
+    font-size: 14px;
+}
+
+div#contentResumPayment div.contentProduct div.contentInfo p.title {
+    font-weight: normal;
+    text-align: left;
+    font-weight: bold;
+}
+
+div#contentResumPayment div.contentProduct div.contentInfo span {
+    text-align: right;
+    width: 100%;
+}
+
+div#contentResumPayment div.contentProduct div.contentInfo p.price {
+    margin-bottom: 0.2em;
+    font-size: 19px;
+    font-weight: 500;
+}
+div#contentResumPayment div.contentPayment div#contentData{
+    margin-top: 1.5em;
+}
+div#contentResumPayment div.contentPayment div#contentData span#contentImg {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 1em;
+    gap: 2.2em;
+}
+div#contentResumPayment div.contentPayment div#contentData span#contentImg p{
+    color: gray;
+}
+
+div#contentResumPayment div.contentPayment div#contentData p {
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+div#contentResumPayment div.contentPayment div#contentData span#contentInformation {
+    text-align: left;
+    margin-left: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+div#contentResumPayment div.contentPayment div#contentData div#contentInformation{
+    display: flex;
+
+}
+div#contentResumPayment div.contentPayment div#contentData div#contentInformation span {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+div#contentResumPayment div.contentPayment div#contentData div#contentInformation span strong{
+    font-weight: 500;
+}
+
+div#contentResumPayment div.contentPayment div#contentData div#contentInformation span:nth-child(1) {
+    margin-left: 1em;
+}
+
+div#contentResumPayment div.contentPayment div#contentData div#contentInformation span:nth-child(2) p {
+    margin-top: 0.2em;
+    color: gray;
+}

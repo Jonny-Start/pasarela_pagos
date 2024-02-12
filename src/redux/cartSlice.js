@@ -11,6 +11,19 @@ const initialState = {
   //   },
 };
 
+/**
+ * Redux slice for managing the cart state.
+ *
+ * @typedef {Object} CartSlice
+ * @property {string} name - The name of the slice.
+ * @property {Object} initialState - The initial state of the cart.
+ * @property {Function} reducers.addProduct - Reducer function for adding a product to the cart.
+ * @property {Function} reducers.removeProduct - Reducer function for removing a product from the cart.
+ * @property {Function} reducers.moreUnit - Reducer function for increasing the quantity of a product in the cart.
+ * @property {Function} reducers.lessUnit - Reducer function for decreasing the quantity of a product in the cart.
+ * @property {Function} reducers.addAllProductsCart - Reducer function for adding all products to the cart.
+ * @property {Function} reducers.removeAllProductsCart - Reducer function for removing all products from the cart.
+ */
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -46,6 +59,10 @@ export const cartSlice = createSlice({
     addAllProductsCart: (state, action) => {
       state.cart = action.payload;
     },
+
+    removeAllProductsCart: (state) => {
+      state.cart = [];
+    },
   },
 });
 
@@ -55,5 +72,6 @@ export const {
   moreUnit,
   lessUnit,
   addAllProductsCart,
+  removeAllProductsCart,
 } = cartSlice.actions;
 export default cartSlice.reducer;

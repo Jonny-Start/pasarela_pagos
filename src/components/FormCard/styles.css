@@ -3,8 +3,92 @@ select,
 input[type="checkbox"] {
     background-color: white;
     color: black;
+    border-radius: 4px;
+    height: 2.5em;
+    font-size: 14px;
+    margin: 0.2em;
+    padding: 0.3em;
+    border: 1px solid gray;
+    outline: none;
 }
 
-.errorInput{
+input,
+select a:active,
+:focus {
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.errorInput {
     background-color: red;
 }
+
+div.contentImg {
+    text-align: center;
+    margin: 0.5em;
+}
+
+div.contentImg img {
+    width: 3em;
+    margin-right: 1em;
+}
+
+label {
+    display: inline-flex;
+    flex-direction: column;
+    text-align: left;
+    font-size: 12px;
+    width: 100%;
+}
+
+label#contentNumber {
+    position: relative;
+}
+
+label#contentNumber img {
+    position: absolute;
+    width: 2rem;
+    right: 12px;
+    top: 24px;
+}
+img#Imgvisa{
+    right: 13px !important;
+    top: 33px !important;
+}
+div#contentDataCard {
+    display: flex;
+    gap: 10px;
+}
+
+div#contentDataCard label#contentDate {
+    width: fit-content;
+}
+
+div#contentDataCard label#contentDate span {
+    display: flex;
+    align-items: center;
+}
+
+div#contentDataCard label#contentCvc {
+    width: -webkit-fill-available;
+}
+
+label#contentID span {
+    display: flex;
+    justify-content: space-between;
+}
+
+label#contentID span select#typeDocument {
+    width: 30%;
+}
+
+label#contentID span input#numberDocument {
+    width: 70%;
+}
+
+label#contentTerms {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+

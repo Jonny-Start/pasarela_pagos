@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux"
 import { addMessage } from "./../../redux/appSlice.js"
 import { setStepData } from "./../../redux/stepPaySlice.js"
 
-export const Method = ({setUpdateLocalStep, setDisabledButtonPay}) => {
+export const Method = ({ setUpdateLocalStep, setDisabledButtonPay, setStepInfo }) => {
     const dispatch = useDispatch();
 
     const onMessage = () => {
@@ -17,6 +17,7 @@ export const Method = ({setUpdateLocalStep, setDisabledButtonPay}) => {
     const onChangeStep = () => {
         dispatch(setStepData(3));
         setDisabledButtonPay(true);
+        setStepInfo();
         setUpdateLocalStep();
     }
 

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MasterCard from './../../assets/img/masterCard.svg';
 import Visa from './../../assets/img/visa.svg';
 import './styles.css';
@@ -90,7 +90,7 @@ const getCardType = (number) => {
 
 }
 
-export const FormCard = ({ setUpdateLocalStep, setDisabledButtonPay }) => {
+export const FormCard = ({ setUpdateLocalStep, setDisabledButtonPay, setResumDataPayment }) => {
     const dispatch = useDispatch();
     const { stepData = {} } = useSelector((state) => state.stepPay);
     const {
@@ -129,17 +129,28 @@ export const FormCard = ({ setUpdateLocalStep, setDisabledButtonPay }) => {
         inputCheck
     });
 
+    useEffect(() => {
+        setResumDataPayment(formData);
+        dispatch(setStepData({ ...formData }));
+    }, [formData]);
+
+    useEffect(() => {
+        setFormData({ ...formData, 'typeCard': typeCard });
+    }, [typeCard]);
+
     const handleDataForm = async (nameObject, e) => {
         // console.time('time');
+
+        setUpdateLocalStep();
         let newValue = e.target.value;
         if (nameObject === 'inputNumberCard') {
             validateTypeCard(newValue);
             newValue = addSpaces(newValue);
         }
+
+
         setFormData(prevFormData => ({ ...prevFormData, [nameObject]: newValue }));
-        dispatch(setStepData({ ...formData, [nameObject]: newValue }));
-        setUpdateLocalStep();
-        setInputError(prevInputError => ({ ...prevInputError, [nameObject]: false }));
+        // setInputError(prevInputError => ({ ...prevInputError, [nameObject]: false }));
         // console.timeEnd('time');
     };
 
@@ -201,52 +212,54 @@ export const FormCard = ({ setUpdateLocalStep, setDisabledButtonPay }) => {
 
     return (
         <div>
-            <h2>Metodos de pago</h2>
+            <h2>Métodos de pago</h2>
             <div className="contentImg">
                 <img src={MasterCard} alt="imagen visa" />
                 <img src={Visa} alt="imagen mastercard" />
             </div>
 
-            <label htmlFor="number">Número de la tarjeta
+            <label id='contentNumber' htmlFor="number">Número de la tarjeta
                 <input type="text" id='number' name='numberCard' className={`${inputError.inputNumberCard == true && 'errorInput'}`} required pattern="[0-9]*" maxLength="19" autoComplete="cc-number" value={formData.inputNumberCard} onChange={(e) => (e.target.value = filterData(e.target.value, 19, 'numero'), handleDataForm('inputNumberCard', e))} />
-                {typeCard == 'Visa' ? <img src={Visa} alt="Visa" /> : typeCard == 'Mastercard' ? <img src={MasterCard} alt="Mastercard" /> : ''}
+                {typeCard == 'Visa' ? <img id='Imgvisa' src={Visa} alt="Visa" /> : typeCard == 'Mastercard' ? <img src={MasterCard} alt="Mastercard" /> : ''}
             </label>
 
             <div id='contentDataCard'>
-                <label htmlFor="month">Vencimiento
-                    <select name="month" id="month" required value={formData.selectMonth} onChange={(e) => handleDataForm('selectMonth', e)}>
-                        <option value="" disabled>Mes</option>
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
-                        <option value="07">07</option>
-                        <option value="08">08</option>
-                        <option value="09">09</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                    </select>
-                    <select name="year" id="year" required value={formData.selectYear} onChange={(e) => handleDataForm('selectYear', e)}>
-                        <option value="" disabled>Año</option>
-                        <option value="24">24</option>
-                        <option value="25">25</option>
-                        <option value="26">26</option>
-                        <option value="27">27</option>
-                        <option value="28">28</option>
-                        <option value="29">29</option>
-                        <option value="30">30</option>
-                        <option value="31">31</option>
-                        <option value="32">32</option>
-                        <option value="33">33</option>
-                        <option value="34">34</option>
-                        <option value="35">35</option>
-                    </select>
+                <label id='contentDate' htmlFor="month">Vencimiento
+                    <span>
+                        <select name="month" id="month" required value={formData.selectMonth} onChange={(e) => handleDataForm('selectMonth', e)}>
+                            <option value="" disabled>Mes</option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                        <select name="year" id="year" required value={formData.selectYear} onChange={(e) => handleDataForm('selectYear', e)}>
+                            <option value="" disabled>Año</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                        </select>
+                    </span>
                 </label>
 
-                <label htmlFor="cvc">CVC (Código de seguridad)
+                <label id='contentCvc' htmlFor="cvc">CVC (Código de seguridad)
                     <input type="text" name="cvc" id="cvc" required pattern="[0-9]*" maxLength="4" autoComplete="cc-csc" value={formData.inputCvv} onChange={(e) => (e.target.value = filterData(e.target.value, 3, 'numero'), handleDataForm('inputCvv', e))} />
                 </label>
             </div>
@@ -255,19 +268,21 @@ export const FormCard = ({ setUpdateLocalStep, setDisabledButtonPay }) => {
                 <input type="text" name='name' id='name' required autoComplete="cc-name" value={formData.inputName} onChange={(e) => handleDataForm('inputName', e)} />
             </label>
 
-            <label htmlFor="typeDocument">Identificación de la tarjeta
-                <select name="typeDocument" id="typeDocument" required value={formData.selectTypeDocument} onChange={(e) => handleDataForm('selectTypeDocument', e)}>
-                    <option value="" disabled>Tipo</option>
-                    <option value="CC">CC - Cédula de Ciudadanía</option>
-                    <option value="CE">CE - Cédula de Extranjería</option>
-                    <option value="NIT">NIT - Número de Identificación Tributaria</option>
-                    <option value="PP">PP - Pasaporte</option>
-                    <option value="TI">TI - Tarjeta de Identidad</option>
-                    <option value="DNI">DNI - Documento Nacional de Identidad</option>
-                    <option value="RG">RG - Carteira de Identidade / Registro Geral</option>
-                    <option value="OTHER">Otro</option>
-                </select>
-                <input type="text" required name="numberDocument" id="numberDocument" pattern="[0-9]*" maxLength="10" placeholder='Número de documento' value={formData.inputNumberDocument} onChange={(e) => (e.target.value = filterData(e.target.value, 10, 'numero'), handleDataForm('inputNumberDocument', e))} />
+            <label id='contentID' htmlFor="typeDocument">Identificación de la tarjeta
+                <span>
+                    <select name="typeDocument" id="typeDocument" required value={formData.selectTypeDocument} onChange={(e) => handleDataForm('selectTypeDocument', e)}>
+                        <option value="" disabled>Tipo</option>
+                        <option value="CC">CC - Cédula de Ciudadanía</option>
+                        <option value="CE">CE - Cédula de Extranjería</option>
+                        <option value="NIT">NIT - Número de Identificación Tributaria</option>
+                        <option value="PP">PP - Pasaporte</option>
+                        <option value="TI">TI - Tarjeta de Identidad</option>
+                        <option value="DNI">DNI - Documento Nacional de Identidad</option>
+                        <option value="RG">RG - Carteira de Identidade / Registro Geral</option>
+                        <option value="OTHER">Otro</option>
+                    </select>
+                    <input type="text" required name="numberDocument" id="numberDocument" pattern="[0-9]*" maxLength="10" placeholder='Número de documento' value={formData.inputNumberDocument} onChange={(e) => (e.target.value = filterData(e.target.value, 10, 'numero'), handleDataForm('inputNumberDocument', e))} />
+                </span>
             </label>
 
             <label htmlFor="fees">Número de cuotas
@@ -311,7 +326,7 @@ export const FormCard = ({ setUpdateLocalStep, setDisabledButtonPay }) => {
                 </select>
             </label>
 
-            <label htmlFor='terms'>Confirmo que he leído y comprendido los términos y condiciones, así como la política de privacidad, para proceder con este pago.
+            <label id='contentTerms' htmlFor='terms'>Confirmo que he leído y comprendido los términos y condiciones, así como la política de privacidad, para proceder con este pago.
                 <input type="checkbox" required name='terms' id='terms' value={formData.inputCheck} onChange={handleInputCheckChange} />
             </label>
         </div>
